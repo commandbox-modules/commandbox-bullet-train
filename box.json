@@ -1,0 +1,21 @@
+{
+    "name":"CommandBox Bullet Train",
+    "version":"0.0.0",
+    "author":"Brad Wood",
+    "location":"commandbox-modules/commandbox-bullet-train#v0.0.0",
+    "homepage":"https://github.com/commandbox-modules/commandbox-bullet-train/",
+    "documentation":"",
+    "repository":{
+        "type":"",
+        "URL":"https://github.com/commandbox-modules/commandbox-bullet-train/"
+    },
+    "bugs":"",
+    "slug":"commandbox-bullet-train",
+    "shortDescription":"A cool zsh-inspired promp customizer",
+    "type":"commandbox-modules",
+    "scripts":{
+        "postVersion":"package set location='commandbox-modules/commandbox-bullet-train#v`package version`'",
+        "onRelease":"publish",
+        "postPublish":"!git push --follow-tags"
+    }
+}
