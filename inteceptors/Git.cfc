@@ -13,12 +13,8 @@ component {
 		var repoPath = CWD & '/.git';
 		
 		/*
-		TODO:  
-		plus for files added on stage
-		many point start for modified files
-		X for delete files on stage???
-		5 point start for untracked files
-		equals sign for unmerged state?
+		TODO:
+		equals sign for synced
 		up arrow for ahead state from remote
 		down arrow for behind state from remote
 		up/down arrow for diverged state from remote
@@ -44,7 +40,6 @@ component {
 				var hasUnCommittedChanges = arrayLen( repoStatus.getUncommittedChanges() );
 				var hasUntracked = arrayLen( repoStatus.getUntracked() );
 				var hasUntrackedFolders = arrayLen( repoStatus.getUntrackedFolders() );
-				// repoStatus.getConflictingStageState();
 				
 				/*systemoutput( 'isClean: ' & isClean, 1 )
 				systemoutput( 'hasAdded: ' & hasAdded, 1 )
