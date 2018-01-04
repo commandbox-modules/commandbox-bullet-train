@@ -5,12 +5,36 @@ component {
 	property name='fileSystem' inject='fileSystem';
 	property name='print' inject='print';
 
+	function configure() {
+		variables.dataCache = {};
+		variables.running = {};
+	}
+
 	function onBulletTrain( interceptData ) {
 		
 		if( !interceptData.settings.gitEnable ) { return; }
 		
 		var CWD = fileSystem.resolvePath( '' );
+		var threadName = 'gitBulletTrainCar#createUUID()#'; 
+		thread name='#threadName#' timeout=10 CWD='#CWD#' interceptData='#interceptData#' {
+			generateData( attributes.CWD, attributes.interceptData );
+		}
+		
+		thread action="join" name='#threadName#' timeout=200;
+		
+		interceptData.cars.git = dataCache[ CWD ] ?: { text : print.text( ' ... ', '#interceptData.settings.gitText#on#interceptData.settings.gitDirtyBG#' ), background : interceptData.settings.gitDirtyBG };
+			
+	}
+	
+	
+	private function generateData( CWD, interceptData ) {
 		var repoPath = CWD & '/.git';
+		var result = {};
+		
+		// Short circuit so we don't run more than once for the same dir
+		if( running[ CWD ] ?: false ) { return; }
+		
+		running[ CWD ] = true;
 		
 		/*
 		TODO:
@@ -40,8 +64,9 @@ component {
 				var hasUnCommittedChanges = arrayLen( repoStatus.getUncommittedChanges() );
 				var hasUntracked = arrayLen( repoStatus.getUntracked() );
 				var hasUntrackedFolders = arrayLen( repoStatus.getUntrackedFolders() );
+				var hasIgnoredNotInIndex = arrayLen( repoStatus.getIgnoredNotInIndex() );
 				
-				/*systemoutput( 'isClean: ' & isClean, 1 )
+		/*		systemoutput( 'isClean: ' & isClean, 1 )
 				systemoutput( 'hasAdded: ' & hasAdded, 1 )
 				systemoutput( 'hasConflicting: ' & hasConflicting, 1 )
 				systemoutput( 'hasChanged: ' & hasChanged, 1 )
@@ -50,7 +75,8 @@ component {
 				systemoutput( 'hasModified: ' & hasModified, 1 )
 				systemoutput( 'hasUnCommittedChanges: ' & hasUnCommittedChanges, 1 )
 				systemoutput( 'hasUntracked: ' & hasUntracked, 1 )
-				systemoutput( 'hasUntrackedFolders: ' & hasUntrackedFolders, 1 )*/
+				systemoutput( 'hasUntrackedFolders: ' & hasUntrackedFolders, 1 )
+				systemoutput( 'hasIgnoredNotInIndex: ' & hasIgnoredNotInIndex, 1 )*/
 				
 				var backgroundColor = isClean ? interceptData.settings.gitCleanBG : interceptData.settings.gitDirtyBG;
 				
@@ -84,13 +110,15 @@ component {
 					statusText &= ' -#hasMissing+hasRemoved#';
 				}
 
-				interceptData.cars.git.text = print.text( ' ' & statusText & ' ', '#interceptData.settings.gitText#on#backgroundColor#' );					
-				interceptData.cars.git.background = backgroundColor;
+				result.text = print.text( ' ' & statusText & ' ', '#interceptData.settings.gitText#on#backgroundColor#' );					
+				result.background = backgroundColor;
 			}
+		
+			dataCache[ CWD ] = result;
 			
 		} catch( any var e ) {
-			interceptData.cars.git.text = 'Git car: ' & e.message;
-			interceptData.cars.git.background = 'black';
+			result.text = 'Git car: ' & e.message;
+			result.background = 'black';
 		} finally {
 			
 			// Release file system locks on the repo
@@ -98,8 +126,11 @@ component {
 				git.getRepository().close();
 				git.close();
 			}
+			
+			running[ CWD ] = false;
 		}
 		
+	
 	}
 
 }
