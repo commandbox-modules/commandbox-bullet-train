@@ -51,11 +51,25 @@ component {
 	
 			if( directoryExists( repoPath ) ) {
 				var unicode = interceptData.settings.unicode;
+				// Default background color
+				var backgroundColor = interceptData.settings.gitCleanBG;
 				
 				var GitAPI = createObject( 'java', 'org.eclipse.jgit.api.Git' );
 				var git = GitAPI.open( createObject( 'java', 'java.io.File' ).init( repoPath ) );
 				var branchName = git.getRepository().getBranch();
 				
+				var statusText = '';
+				if( unicode ) {
+					statusText &= '➽ ';
+				}
+				statusText &= branchName;
+				result.text = print.text( ' ' & statusText & ' ', '#interceptData.settings.gitText#on#backgroundColor#' );		
+				result.background = backgroundColor;
+				
+				// Store partial results if there's nothing else there
+				dataCache[ CWD ] = dataCache[ CWD ] ?: result;
+				
+				// Now, on to the slower stuff.
 				var repoStatus = git.status().call();
 				var isClean = repoStatus.isClean();
 				var hasAdded = arrayLen( repoStatus.getAdded() );
@@ -81,7 +95,7 @@ component {
 				systemoutput( 'hasUntrackedFolders: ' & hasUntrackedFolders, 1 )
 				systemoutput( 'hasIgnoredNotInIndex: ' & hasIgnoredNotInIndex, 1 )*/
 				
-				var backgroundColor = isClean ? interceptData.settings.gitCleanBG : interceptData.settings.gitDirtyBG;
+				backgroundColor = isClean ? interceptData.settings.gitCleanBG : interceptData.settings.gitDirtyBG;
 				
 				// The same file can have a staged modification and also be modified again in the working directory.
 				// Get a unique list of modified file names.
@@ -93,12 +107,6 @@ component {
 					uniqueModified[ file ] = '';
 				}
 				unniqueModifiedCount = uniqueModified.count();
-				
-				var statusText = '';
-				if( unicode ) {
-					statusText &= '➽ ';
-				}
-				statusText &= branchName ;
 				
 				// file added
 				if( hasUntracked || hasAdded ) {
@@ -113,7 +121,7 @@ component {
 					statusText &= ' -#hasMissing+hasRemoved#';
 				}
 
-				result.text = print.text( ' ' & statusText & ' ', '#interceptData.settings.gitText#on#backgroundColor#' );					
+				result.text = print.text( ' ' & statusText & ' ', '#interceptData.settings.gitText#on#backgroundColor#' );
 				result.background = backgroundColor;
 			}
 		

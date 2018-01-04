@@ -18,7 +18,8 @@ component {
 			'execTimeEnable' : true,
 			'execTimeText' : 'black',
 			'execTimeBG' : 'yellow',
-			'execTimeThresholdMS' : 5,
+			// Only show exec time if it's over this many miliseconds
+			'execTimeThresholdMS' : 20,
 			
 			// timestamp car
 			'timeEnable' : true,
@@ -40,6 +41,7 @@ component {
 			'gitText' : 'white',
 			'gitCleanBG' : 'green',
 			'gitDirtyBG' : 'red',
+			// Wait this many miliseconds to collect the Git data before giving up
 			'gitTimeoutMS' : 200,
 			
 			// Previous command status car
