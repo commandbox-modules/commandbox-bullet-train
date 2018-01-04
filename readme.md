@@ -9,5 +9,7 @@ Install the module like so:
 install commandbox-bullet-train
 ```
 
+**THIS MODULE REQUIRES THE LATEST COMMANDBOX 4.0 SNAPSHOT RELEASE!**
+
 # Configuration
 

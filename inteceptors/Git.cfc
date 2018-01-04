@@ -3,6 +3,9 @@ component {
 	property name='print' inject='print';
 
 	function onBulletTrain( interceptData ) {
+		
+		if( !interceptData.settings.gitEnable ) { return; }
+		
 		var CWD = fileSystem.resolvePath( '' );
 		var repoPath = CWD & '/.git';
 		
@@ -14,8 +17,9 @@ component {
 				var GitAPI = createObject( 'java', 'org.eclipse.jgit.api.Git' );
 				var git = GitAPI.open( createObject( 'java', 'java.io.File' ).init( repoPath ) );
 				var branchName = git.getRepository().getBranch();
-				interceptData.Git = print.boldwhiteOnGreen( ' ' & branchName & ' >' );
+				interceptData.cars.git.text = print.text( ' ' & branchName & ' ', '#interceptData.settings.gitText#on#interceptData.settings.gitBG#' );
 					
+				interceptData.cars.git.background = interceptData.settings.gitBG;
 			}
 			
 		} catch( any var e ) {

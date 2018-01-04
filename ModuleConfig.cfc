@@ -1,10 +1,54 @@
 component {
-	
+
+	processingdirective pageEncoding='UTF-8';
+		
 	function configure() {
+		
+		variables.print = wirebox.getInstance( 'print' );
 		
 		settings = {
 			// Turn the entire module on/off
-			'enable' : true
+			'enable' : true,
+			'promptChar' : '>' ,
+			'terminalBG' : 'black',
+			'separateLine' : true,
+			'addNewLine' : true,
+			'unicode' : true,
+			
+			'execTimeEnable' : true,
+			'execTimeText' : 'black',
+			'execTimeBG' : 'yellow',
+			'execTimeThresholdMS' : 5,
+			
+			'timeEnable' : true,
+			'timeText' : 'black',
+			'timeBG' : 'white',
+			
+			'serverEnable' : true,
+			'serverText' : 'black',
+			'serverBG' : 'white',
+			
+			'dirEnable' : true,
+			'dirText' : 'white',
+			'dirBG' : 'blue',
+			
+			'gitEnable' : true,
+			'gitText' : 'white',
+			'gitBG' : 'green',
+			
+			'statusEnable' : true,
+			'statusText' : 'white',
+			'statusFailBG' : 'red',
+			'statusSuccessBG' : 'green',
+			
+			'boxVersionEnable' : true,
+			'boxVersionText' : 'black',
+			'boxVersionBG' : 'yellow',
+			
+			'packageEnable' : true,
+			'packageText' : 'white',
+			'packageBG' : 'magenta'
+			
 		};
 		
 		interceptorSettings = {
@@ -15,6 +59,7 @@ component {
 		
 		interceptors = []
 		files.each( function( i ) {
+			//if( i.listLast( '\/' ).listFirst( '.' ) != 'execTime' ) return; 
 			interceptors.append( {
 				class : moduleMapping & '.inteceptors.' & i.listLast( '\/' ).listFirst( '.' )
 			} );
@@ -24,20 +69,41 @@ component {
 		
 	
     function prePrompt( interceptData ) {
+    	if( settings.unicode ) {
+    		var segment_separator='';	
+    	} else {
+    		var segment_separator='>';    		
+    	}
+    	
     	if( !settings.enable ) {
     		return;
     	}
  
 		var interceptorService = wirebox.getInstance( dsl='interceptorService' );
 		   	
-    	var myData = {};
+    	var myData = {
+    		settings : settings,
+    		cars : {}
+    	};
     	interceptorService.announceInterception( 'onBulletTrain', myData );
     	
-    	var prompt = '';
-    	for( var p in myData ) {
-    		prompt &= myData[ p ];
+    	var prompt = ( settings.addNewLine ? chr( 10 ) : '' );
+    	var lastbackground = 'black';
+    	var first = true;
+    	for( var p in myData.cars ) {
+    		if( !isNull( myData.cars[ p ].text ) ) {
+    			if( !first ) {
+	    			prompt &= print.text( segment_separator, lastbackground & 'on' & myData.cars[ p ].background );    				
+    			}
+	    		prompt &= myData.cars[ p ].text;
+	    		lastbackground = myData.cars[ p ].background ?: 'black';
+	    		first = false;
+	    	}
     	}
-    	interceptData.prompt = prompt & chr( 10 ) & '> ';
+    	
+		prompt &= print.text( segment_separator, lastbackground );
+    	
+    	interceptData.prompt = prompt & ( settings.separateLine ? chr( 10 ) : '' ) & settings.promptChar &' ';
         
     }
     

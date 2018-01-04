@@ -6,6 +6,8 @@ component {
 
 	function onBulletTrain( interceptData ) {
 		
+		if( !interceptData.settings.serverEnable ) { return; }
+		
 		// Map the server statuses to a color
 		var statusColors = {
 			running : 'greenOnWhite',
@@ -19,7 +21,11 @@ component {
 			var status = serverService.isServerRunning( serverInfo ) ? 'running' : 'stopped';
 			var version = semanticVersion.parseVersion( serverInfo.engineVersion );
 			
-			interceptData.currentServer = print.blackOnWhite( ' ' & serverInfo.engineName & ' ' & version.major & '.' & version.minor & '.' & version.revision & ' '& '('  ) & print.bold( status, statusColors[ status ] ) & print.blackOnWhite( ') >' );	
+			interceptData.cars.server.text = print.text( ' ' & serverInfo.engineName & ' ' & version.major & '.' & version.minor & '.' & version.revision & ' '& '(', '#interceptData.settings.serverText#on#interceptData.settings.serverBG#' ) 
+				& print.text( status, statusColors[ status ] & 'on#interceptData.settings.serverBG#' ) 
+				& print.text( ') ', '#interceptData.settings.serverText#on#interceptData.settings.serverBG#' );
+			
+			interceptData.cars.server.background = interceptData.settings.serverBG;	
 			
 		}
 		

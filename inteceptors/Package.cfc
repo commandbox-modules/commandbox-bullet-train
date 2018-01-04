@@ -4,10 +4,15 @@ component {
 	property name='print' inject='print';
 
 	function onBulletTrain( interceptData ) {
+		
+		if( !interceptData.settings.boxVersionEnable ) { return; }
+		
 		var CWD = fileSystem.resolvePath( '' );
 		if( packageService.isPackage( CWD ) ) {
 			var boxJSON = packageService.readPackageDescriptor( CWD );
-			interceptData.currentPackage = print.boldWhiteOnmagenta( ' ' & boxJSON.name & ' (' & boxJSON.version & ') >' );
+			interceptData.cars.package.text = print.boldWhiteOnmagenta( ' ' & boxJSON.name & ' (' & boxJSON.version & ') ', '#interceptData.settings.packageText#on#interceptData.settings.packageBG#' );
+		
+			interceptData.cars.package.background = interceptData.settings.packageBG;
 		}
 	}
 
