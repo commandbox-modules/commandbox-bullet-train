@@ -63,7 +63,7 @@ component {
 					statusText &= '➽ ';
 				}
 				statusText &= branchName;
-				result.text = print.text( ' ' & statusText & ' ', '#interceptData.settings.gitText#on#backgroundColor#' );		
+				result.text = print.text( ' ' & statusText & ' ... ', '#interceptData.settings.gitText#on#backgroundColor#' );		
 				result.background = backgroundColor;
 				
 				// Store partial results if there's nothing else there
