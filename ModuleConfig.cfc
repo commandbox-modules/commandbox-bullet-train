@@ -40,6 +40,7 @@ component {
 			'gitText' : 'white',
 			'gitCleanBG' : 'green',
 			'gitDirtyBG' : 'red',
+			'gitTimeoutMS' : 200,
 			
 			// Previous command status car
 			'statusEnable' : true,

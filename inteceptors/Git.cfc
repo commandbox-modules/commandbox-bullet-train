@@ -15,13 +15,16 @@ component {
 		if( !interceptData.settings.gitEnable ) { return; }
 		
 		var CWD = fileSystem.resolvePath( '' );
+		// Fire off the data gathering in a thread.  This can take several seconds on a large repo
 		var threadName = 'gitBulletTrainCar#createUUID()#'; 
 		thread name='#threadName#' timeout=10 CWD='#CWD#' interceptData='#interceptData#' {
 			generateData( attributes.CWD, attributes.interceptData );
 		}
 		
-		thread action="join" name='#threadName#' timeout=200;
+		// Wait up to 200 ms for the thread to finish.
+		thread action="join" name='#threadName#' timeout=interceptData.settings.gitTimeoutMS;
 		
+		// If the thread is still running, we'll use the last cached version, or just output "..." if there's nothing cached.
 		interceptData.cars.git = dataCache[ CWD ] ?: { text : print.text( ' ... ', '#interceptData.settings.gitText#on#interceptData.settings.gitDirtyBG#' ), background : interceptData.settings.gitDirtyBG };
 			
 	}
