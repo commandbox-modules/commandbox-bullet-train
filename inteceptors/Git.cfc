@@ -46,7 +46,7 @@ component {
 				var hasUntrackedFolders = arrayLen( repoStatus.getUntrackedFolders() );
 				// repoStatus.getConflictingStageState();
 				
-				/*systemoutput( 'isClean: ' & isClean, 1 )
+			/*	systemoutput( 'isClean: ' & isClean, 1 )
 				systemoutput( 'hasAdded: ' & hasAdded, 1 )
 				systemoutput( 'hasConflicting: ' & hasConflicting, 1 )
 				systemoutput( 'hasChanged: ' & hasChanged, 1 )
@@ -65,22 +65,31 @@ component {
 				}
 				statusText &= 'branchName ';
 				
+				// file added but not staged
 				if( hasUntracked ) {
 					statusText &= ' +#hasUntracked#';					
 				}				
+				// File mofied but not staged
 				if( hasModified ) {
 					statusText &= ' ~#hasModified#';					
 				}				
+				// File deleted by not staged
 				if( hasMissing ) {
 					statusText &= ' -#hasMissing#';					
 				}
 				
+				// Staged removal and addition
 				if( hasAdded && hasRemoved ) {
 					statusText &= ' ' & ( unicode ? '±' : '+/-' );
+				// Staged addition
 				} else if ( hasAdded ) {
 					statusText &= ' ' & ( unicode ? '＋' : '+' );
+				// Staged removal
 				} else if ( hasRemoved ) {
 					statusText &= ' ' & ( unicode ? '－' : '-' );
+				// Staged modification
+				}else if ( hasChanged ) {
+					statusText &= ' ' & ( unicode ? '~' : '~' );
 				}
 				
 				interceptData.cars.git.text = print.text( ' ' & statusText & ' ', '#interceptData.settings.gitText#on#backgroundColor#' );
