@@ -7,44 +7,52 @@ component {
 		variables.print = wirebox.getInstance( 'print' );
 		
 		settings = {
-			// Turn the entire module on/off
+			// General module settings
 			'enable' : true,
 			'promptChar' : '>' ,
-			'terminalBG' : 'black',
 			'separateLine' : true,
 			'addNewLine' : true,
 			'unicode' : true,
 			
+			// Execution time car
 			'execTimeEnable' : true,
 			'execTimeText' : 'black',
 			'execTimeBG' : 'yellow',
 			'execTimeThresholdMS' : 5,
 			
+			// timestamp car
 			'timeEnable' : true,
 			'timeText' : 'black',
 			'timeBG' : 'white',
 			
+			// server info car
 			'serverEnable' : true,
 			'serverText' : 'black',
 			'serverBG' : 'white',
 			
+			// current working directory car
 			'dirEnable' : true,
 			'dirText' : 'white',
 			'dirBG' : 'blue',
 			
+			// Git repo info car
 			'gitEnable' : true,
 			'gitText' : 'white',
-			'gitBG' : 'green',
+			'gitCleanBG' : 'green',
+			'gitDirtyBG' : 'red',
 			
+			// Previous command status car
 			'statusEnable' : true,
 			'statusText' : 'white',
 			'statusFailBG' : 'red',
 			'statusSuccessBG' : 'green',
 			
+			// CommandBox version car
 			'boxVersionEnable' : true,
 			'boxVersionText' : 'black',
 			'boxVersionBG' : 'yellow',
 			
+			// Package info car
 			'packageEnable' : true,
 			'packageText' : 'white',
 			'packageBG' : 'magenta'

@@ -8,7 +8,7 @@ component {
 		if( !interceptData.settings.boxVersionEnable ) { return; }
 		
 		var version = semanticVersion.parseVersion( shell.getVersion().replace( '@build.version@+@build.number@', '1.2.3+12345' ) );
-		interceptData.cars.boxVersion.text = print.text( ' CommandBox v' & version.major & '.' & version.minor & '.' & version.revision & ' ', '#interceptData.settings.boxVersionText#on#interceptData.settings.boxVersionBG#' );
+		interceptData.cars.boxVersion.text = print.text( ' CLI v' & version.major & '.' & version.minor & '.' & version.revision & ' ', '#interceptData.settings.boxVersionText#on#interceptData.settings.boxVersionBG#' );
 		
 		interceptData.cars.boxVersion.background = interceptData.settings.boxVersionBG;
 	}

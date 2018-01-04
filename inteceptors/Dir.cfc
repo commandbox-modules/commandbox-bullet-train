@@ -1,4 +1,7 @@
 component {
+	
+	processingdirective pageEncoding='UTF-8';
+	
 	property name='fileSystem' inject='fileSystem';
 	property name='print' inject='print';
 
@@ -6,7 +9,16 @@ component {
 		
 		if( !interceptData.settings.dirEnable ) { return; }
 		
-		interceptData.cars.dir.text = print.text( ' ' & fileSystem.resolvePath( '' ).listLast( '\/' ) & '/ ', '#interceptData.settings.dirText#on#interceptData.settings.dirBG#' );
+		var homeDir = fileSystem.normalizeSlashes( fileSystem.resolvePath( '~' ) );
+		var thisFullpath = fileSystem.normalizeSlashes( fileSystem.resolvePath( '' ) );
+		var thisPath = thisFullpath.listLast( '\/' ) & '/';
+		
+		// Shortcut for home dir
+		if( thisFullpath contains homeDir ) {
+			thisPath = thisFullpath.replaceNoCase( homeDir, '~/' );
+		}
+		
+		interceptData.cars.dir.text = print.text( ' ' & thispath & ' ', '#interceptData.settings.dirText#on#interceptData.settings.dirBG#' );
 			
 		interceptData.cars.dir.background = interceptData.settings.dirBG;	
 	}

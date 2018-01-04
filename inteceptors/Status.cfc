@@ -11,7 +11,7 @@ component {
 		
 		var exitCode = shell.getExitCode();
 		if( exitCode == 0 ) {
-			interceptData.cars.status.text = print.text( ' #( interceptData.settings.unicode ? '•' : '*' )# ', '#interceptData.settings.statusText#on#interceptData.settings.statusSuccessBG#' );
+			interceptData.cars.status.text = print.text( ' #( interceptData.settings.unicode ? '●' : '*' )# ', '#interceptData.settings.statusText#on#interceptData.settings.statusSuccessBG#' );
 			interceptData.cars.status.background = interceptData.settings.statusSuccessBG;	
 		} else {
 			interceptData.cars.status.text = print.text( ' #( interceptData.settings.unicode ? '✘' : 'X' )# ', '#interceptData.settings.statusText#on#interceptData.settings.statusFailBG#' );
