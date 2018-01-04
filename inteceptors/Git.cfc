@@ -46,7 +46,7 @@ component {
 				var hasUntrackedFolders = arrayLen( repoStatus.getUntrackedFolders() );
 				// repoStatus.getConflictingStageState();
 				
-			/*	systemoutput( 'isClean: ' & isClean, 1 )
+				/*systemoutput( 'isClean: ' & isClean, 1 )
 				systemoutput( 'hasAdded: ' & hasAdded, 1 )
 				systemoutput( 'hasConflicting: ' & hasConflicting, 1 )
 				systemoutput( 'hasChanged: ' & hasChanged, 1 )
@@ -59,41 +59,37 @@ component {
 				
 				var backgroundColor = isClean ? interceptData.settings.gitCleanBG : interceptData.settings.gitDirtyBG;
 				
+				// The same file can have a staged modification and also be modified again in the working directory.
+				// Get a unique list of modified file names.
+				var uniqueModified = {};
+				for( var file in repoStatus.getModified().toArray() ) {
+					uniqueModified[ file ] = '';
+				}
+				for( var file in repoStatus.getChanged().toArray() ) {
+					uniqueModified[ file ] = '';
+				}
+				unniqueModifiedCount = uniqueModified.count();
+				
 				var statusText = '';
 				if( unicode ) {
 					statusText &= '➽ ';
 				}
-				statusText &= 'branchName ';
+				statusText &= branchName ;
 				
-				// file added but not staged
-				if( hasUntracked ) {
-					statusText &= ' +#hasUntracked#';					
+				// file added
+				if( hasUntracked || hasAdded ) {
+					statusText &= ' +#hasUntracked+hasAdded#';
 				}				
-				// File mofied but not staged
-				if( hasModified ) {
-					statusText &= ' ~#hasModified#';					
+				// File modified
+				if( unniqueModifiedCount ) {
+					statusText &= ' ~#unniqueModifiedCount#';
 				}				
-				// File deleted by not staged
-				if( hasMissing ) {
-					statusText &= ' -#hasMissing#';					
+				// File deleted
+				if( hasMissing || hasRemoved ) {
+					statusText &= ' -#hasMissing+hasRemoved#';
 				}
-				
-				// Staged removal and addition
-				if( hasAdded && hasRemoved ) {
-					statusText &= ' ' & ( unicode ? '±' : '+/-' );
-				// Staged addition
-				} else if ( hasAdded ) {
-					statusText &= ' ' & ( unicode ? '＋' : '+' );
-				// Staged removal
-				} else if ( hasRemoved ) {
-					statusText &= ' ' & ( unicode ? '－' : '-' );
-				// Staged modification
-				}else if ( hasChanged ) {
-					statusText &= ' ' & ( unicode ? '~' : '~' );
-				}
-				
-				interceptData.cars.git.text = print.text( ' ' & statusText & ' ', '#interceptData.settings.gitText#on#backgroundColor#' );
-					
+
+				interceptData.cars.git.text = print.text( ' ' & statusText & ' ', '#interceptData.settings.gitText#on#backgroundColor#' );					
 				interceptData.cars.git.background = backgroundColor;
 			}
 			
