@@ -6,6 +6,8 @@ and each car can contribute some output to the prompt that is working directory-
 This project is based on the Zsh Bullet Train theme which is based on the Powerline shell prompt.  The goal is to add in additional information 
 to your prompt that is specific to the current working directory, or the last command you ran. 
 
+![](https://raw.githubusercontent.com/commandbox-modules/commandbox-bullet-train/master/images/BTfullPrompt.png)
+
 ## Installation
 
 Install the module like so:
@@ -65,6 +67,8 @@ config set modules.commandbox-bullet-train.enable=true
 This displays the number of milliseconds the previous command took to execute.  Commands who are so fast they fall below a certain
 threshold are ignored. 
 
+![](https://raw.githubusercontent.com/commandbox-modules/commandbox-bullet-train/master/images/BTExecTime.png)
+
 **Config Items**
 
 * `execTimeEnable` - True/false enable this car
@@ -75,6 +79,10 @@ threshold are ignored.
 ## Timestamp
 
 This displays the current time that the prompt was displayed.
+ 
+
+![](https://raw.githubusercontent.com/commandbox-modules/commandbox-bullet-train/master/images/BTTime.png)
+
 
 * `timeEnable` - True/false enable this car
 * `timeText` - ANSI text color
@@ -83,6 +91,10 @@ This displays the current time that the prompt was displayed.
 ## Server Info
 
 If the current working directory has a server that has been started in it, the engine name and version will display.  The current status of the server (running/stopped) will also display.
+ 
+
+![](https://raw.githubusercontent.com/commandbox-modules/commandbox-bullet-train/master/images/BTServer.png)
+
 
 * `serverEnable` - True/false enable this car
 * `serverText` - ANSI text color
@@ -91,6 +103,10 @@ If the current working directory has a server that has been started in it, the e
 ## Current Working Directory
 
 This will output the last folder name of the current working directory.  If you are in your home dir, it will show `~` and if you are in a folder beneath your home dir, it will show the path starting with `~`.
+ 
+
+![](https://raw.githubusercontent.com/commandbox-modules/commandbox-bullet-train/master/images/BTDir.png)
+
 
 * `dirEnable` - True/false enable this car
 * `dirText` - ANSI text color
@@ -101,6 +117,10 @@ This will output the last folder name of the current working directory.  If you 
 If the current working directory is a Git repo, this car will display the name of the branch currently checked out.  The color of the car will be green if the repo's status is "clean" and red if there are uncommitted changes.  This car will also show the number of added, modified, and removed files (staged and unstaged).  
 
 It is a current known limitation that modified file that are also ignored show in the counts.
+ 
+
+![](https://raw.githubusercontent.com/commandbox-modules/commandbox-bullet-train/master/images/BTGit.png)
+
 
 * `gitEnable` - True/false enable this car
 * `gitText` - ANSI text color
@@ -112,6 +132,10 @@ It is a current known limitation that modified file that are also ignored show i
 ## Previous Command Status
 
 This car will show you if your previous command executed successfully or not.  The background of the car will be green if successful and red if failed.  If the previous command failed and the exit code is something other than `1`, the exit code will also be displayed.  
+ 
+
+![](https://raw.githubusercontent.com/commandbox-modules/commandbox-bullet-train/master/images/BTStatus.png)
+
 
 * `statusEnable` - True/false enable this car
 * `statusText` - ANSI text color
@@ -121,6 +145,10 @@ This car will show you if your previous command executed successfully or not.  T
 ## CommandBox Version 
 
 This shows the current version of the CommandBox CLI.
+ 
+
+![](https://raw.githubusercontent.com/commandbox-modules/commandbox-bullet-train/master/images/BTBoxVersion.png)
+
 
 * `boxVersionEnable` - True/false enable this car
 * `boxVersionText` - ANSI text color
@@ -129,6 +157,10 @@ This shows the current version of the CommandBox CLI.
 ## Package Info
 
 If the current working directory is a package (has a `boxjson`) the name and version of the package will appear here.
+ 
+
+![](https://raw.githubusercontent.com/commandbox-modules/commandbox-bullet-train/master/images/BTPackage.png)
+
 
 * `packageEnable` - True/false enable this car
 * `packageText` - ANSI text color
