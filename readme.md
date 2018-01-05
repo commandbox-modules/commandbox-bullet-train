@@ -6,7 +6,7 @@ and each car can contribute some output to the prompt that is working directory-
 This project is based on the Zsh Bullet Train theme which is based on the Powerline shell prompt.  The goal is to add in additional information 
 to your prompt that is specific to the current working directory, or the last command you ran. 
 
-![](https://raw.githubusercontent.com/commandbox-modules/commandbox-bullet-train/master/images/BTfullPrompt.png)
+<img src="https://raw.githubusercontent.com/commandbox-modules/commandbox-bullet-train/master/images/BTfullPrompt.png" class="img-responsive" />
 
 ## Installation
 
