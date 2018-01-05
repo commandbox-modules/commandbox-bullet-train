@@ -1,8 +1,8 @@
 {
     "name":"CommandBox Bullet Train",
-    "version":"0.3.6",
+    "version":"0.4.0",
     "author":"Brad Wood",
-    "location":"commandbox-modules/commandbox-bullet-train#v0.3.6",
+    "location":"commandbox-modules/commandbox-bullet-train#v0.4.0",
     "homepage":"https://github.com/commandbox-modules/commandbox-bullet-train/",
     "documentation":"",
     "repository":{
