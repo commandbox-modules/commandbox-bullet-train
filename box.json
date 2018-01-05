@@ -17,5 +17,8 @@
         "postVersion":"package set location='commandbox-modules/commandbox-bullet-train#v`package version`'",
         "onRelease":"publish",
         "postPublish":"!git push --follow-tags"
-    }
+    },
+    "ignore":[
+        "images"
+    ]
 }

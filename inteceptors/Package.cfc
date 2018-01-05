@@ -5,7 +5,7 @@ component {
 
 	function onBulletTrain( interceptData ) {
 		
-		if( !interceptData.settings.boxVersionEnable ) { return; }
+		if( !interceptData.settings.packageEnable ) { return; }
 		
 		var CWD = fileSystem.resolvePath( '' );
 		if( packageService.isPackage( CWD ) ) {
