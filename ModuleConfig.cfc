@@ -13,13 +13,15 @@ component {
 			'separateLine' : true,
 			'addNewLine' : true,
 			'unicode' : true,
+			// Control the order of the trains.  Removing an item from this list will not make it go away.
+			'carOrder' : 'execTime,status,time,boxVersion,dir,package,server,git',
 			
 			// Execution time car
 			'execTimeEnable' : true,
 			'execTimeText' : 'black',
 			'execTimeBG' : 'yellow',
 			// Only show exec time if it's over this many miliseconds
-			'execTimeThresholdMS' : 20,
+			'execTimeThresholdMS' : 50,
 			
 			// timestamp car
 			'timeEnable' : true,
@@ -34,7 +36,7 @@ component {
 			// current working directory car
 			'dirEnable' : true,
 			'dirText' : 'white',
-			'dirBG' : 'blue',
+			'dirBG' : 'cyan',
 			
 			// Git repo info car
 			'gitEnable' : true,
@@ -43,6 +45,8 @@ component {
 			'gitDirtyBG' : 'red',
 			// Wait this many miliseconds to collect the Git data before giving up
 			'gitTimeoutMS' : 200,
+			// Override this unicode char if you're not using a Powerline font
+			'gitPrefix' : '',
 			
 			// Previous command status car
 			'statusEnable' : true,
@@ -70,14 +74,12 @@ component {
 		
 		interceptors = []
 		files.each( function( i ) {
-			//if( i.listLast( '\/' ).listFirst( '.' ) != 'execTime' ) return; 
 			interceptors.append( {
 				class : moduleMapping & '.inteceptors.' & i.listLast( '\/' ).listFirst( '.' )
 			} );
 		} );
 		
 	}
-		
 	
     function prePrompt( interceptData ) {
     	if( settings.unicode ) {
@@ -101,13 +103,23 @@ component {
     	var prompt = ( settings.addNewLine ? chr( 10 ) : '' );
     	var lastbackground = 'black';
     	var first = true;
-    	for( var p in myData.cars ) {
-    		if( !isNull( myData.cars[ p ].text ) ) {
+    	var thisOrder = settings.carOrder.listToArray();
+    	myData.cars.each( function( car ) {
+    		// Any cars that are present, but not ordered...
+    		if( !thisOrder.containsNoCase( car ) ) {
+    			// ...get tossed on the end of the order
+    			thisOrder.append( car );
+    		}
+    	} );
+    	
+    	for( var car in thisOrder ) {
+    		car = car.trim();
+    		if( !isNull( myData.cars[ car ].text ) ) {
     			if( !first ) {
-	    			prompt &= print.text( segment_separator, lastbackground & 'on' & myData.cars[ p ].background );    				
+	    			prompt &= print.text( segment_separator, lastbackground & 'on' & myData.cars[ car ].background );    				
     			}
-	    		prompt &= myData.cars[ p ].text;
-	    		lastbackground = myData.cars[ p ].background ?: 'black';
+	    		prompt &= myData.cars[ car ].text;
+	    		lastbackground = myData.cars[ car ].background ?: 'black';
 	    		first = false;
 	    	}
     	}

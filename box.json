@@ -11,7 +11,7 @@
     },
     "bugs":"",
     "slug":"commandbox-bullet-train",
-    "shortDescription":"A cool zsh-inspired prompt customizer",
+    "shortDescription":"A cool zsh-inspired prompt customizer for CommandBox 4.0",
     "type":"commandbox-modules",
     "scripts":{
         "postVersion":"package set location='commandbox-modules/commandbox-bullet-train#v`package version`'",

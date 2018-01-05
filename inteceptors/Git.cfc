@@ -59,8 +59,11 @@ component {
 				var branchName = git.getRepository().getBranch();
 				
 				var statusText = '';
-				if( unicode ) {
-					statusText &= '➽ ';
+				// User override
+				if( interceptData.settings.gitPrefix.len() ) {
+					statusText &= '#interceptData.settings.gitPrefix# ';
+				} else if( unicode ) {
+					statusText &= ' ';
 				}
 				statusText &= branchName;
 				result.text = print.text( ' ' & statusText & ' ... ', '#interceptData.settings.gitText#on#backgroundColor#' );		
