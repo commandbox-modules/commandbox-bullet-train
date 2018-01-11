@@ -177,7 +177,7 @@ config set modules.commandbox-bullet-train.customEnable=true
 The message can be a single character or simple string:
 
 ```
-config set modules.commandbox-bullet-train.customContent=" ☢ "
+config set modules.commandbox-bullet-train.customContent=" Smile! "
 ```
 
 Or it can be a system setting expansion:
