@@ -168,7 +168,13 @@ If the current working directory is a package (has a `boxjson`) the name and ver
 
 ## Custom
 
-Output a custom, arbitrary message.  The message can be a single character or simple string:
+Output a custom, arbitrary message.  It's up to you to include any leading or trailing spaes that you want in the output.  This car is disabled by default.
+
+```
+config set modules.commandbox-bullet-train.customEnable=true
+```
+
+The message can be a single character or simple string:
 
 ```
 config set modules.commandbox-bullet-train.customContent=" ☢ "
@@ -201,7 +207,7 @@ There are also a number of top-level configuration items you can specify for Com
 * `unicode` -` - True/false use Unicode characters.  When false, defaults to standard ugly AACII.
 * `carOrder` - A comma-delimited list of cars in the order you wish them to display.  Removing a car from this list will not make it go away, it just falls to the end.
 
-The names of the default cars are as follows: `execTime,status,time,boxVersion,dir,package,server,git`
+The names of the default cars are as follows: `custom,execTime,status,time,boxVersion,dir,package,server,git`
 
 # Extending CommandBox Bullet Train
 
