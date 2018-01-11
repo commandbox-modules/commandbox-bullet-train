@@ -166,6 +166,29 @@ If the current working directory is a package (has a `boxjson`) the name and ver
 * `packageText` - ANSI text color
 * `packageBG` - ANSI background color
 
+## Custom
+
+Output a custom, arbitrary message.  The message can be a single character or simple string:
+
+```
+config set modules.commandbox-bullet-train.customContent=" ☢ "
+```
+
+Or it can be a system setting expansion:
+```
+config set modules.commandbox-bullet-train.customContent=" ${os.name} "
+```
+
+Or it can be a backtick expression, which makes pretty much anything possible!  The following outputs the name of the ForgeBox user that you're logged in with:
+```
+config set modules.commandbox-bullet-train.customContent=" \`forgebox whoami \| grep \"\(.*\)\" | sed s/.*\((.*)\)/\1/ \` "
+```
+
+* `customEnable` - True/false enable this car
+* `customText` - ANSI text color
+* `customBG` - ANSI background color
+* `customContent` - A string, variable expansion, or backtick expression to be evaluated and echoed out
+
 # Configuration
 
 There are also a number of top-level configuration items you can specify for CommandBox Bullet Train

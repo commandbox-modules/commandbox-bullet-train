@@ -14,7 +14,7 @@ component {
 			'addNewLine' : true,
 			'unicode' : true,
 			// Control the order of the trains.  Removing an item from this list will not make it go away.
-			'carOrder' : 'execTime,status,time,boxVersion,dir,package,server,git',
+			'carOrder' : 'custom,execTime,status,time,boxVersion,dir,package,server,git',
 			
 			// Execution time car
 			'execTimeEnable' : true,
@@ -62,7 +62,13 @@ component {
 			// Package info car
 			'packageEnable' : true,
 			'packageText' : 'white',
-			'packageBG' : 'magenta'
+			'packageBG' : 'magenta',
+			
+			// Custom car
+			'customEnable' : false,
+			'customText' : 'white',
+			'customBG' : 'black',
+			'customContent' : ' ☢ '
 			
 		};
 		
