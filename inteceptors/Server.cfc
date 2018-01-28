@@ -19,11 +19,18 @@ component {
 		if( !serverDetails.serverIsNew ) {
 			var serverInfo = serverDetails.serverInfo;
 			var status = serverService.isServerRunning( serverInfo ) ? 'running' : 'stopped';
-			var version = semanticVersion.parseVersion( serverInfo.engineVersion );
 			
-			interceptData.cars.server.text = print.text( ' ' & serverInfo.engineName & ' ' & version.major & '.' & version.minor & '.' & version.revision & ' '& '(', '#interceptData.settings.serverText#on#interceptData.settings.serverBG#' ) 
-				& print.text( status, statusColors[ status ] & 'on#interceptData.settings.serverBG#' ) 
-				& print.text( ') ', '#interceptData.settings.serverText#on#interceptData.settings.serverBG#' );
+			if( serverInfo.WARPath.len() ) {
+				interceptData.cars.server.text = print.text( ' ' & serverInfo.WARPath.listLast( '/\' ) & ' '& '(', '#interceptData.settings.serverText#on#interceptData.settings.serverBG#' ) 
+					& print.text( status, statusColors[ status ] & 'on#interceptData.settings.serverBG#' ) 
+					& print.text( ') ', '#interceptData.settings.serverText#on#interceptData.settings.serverBG#' );
+			} else {
+				var version = semanticVersion.parseVersion( serverInfo.engineVersion );
+				interceptData.cars.server.text = print.text( ' ' & serverInfo.engineName & ' ' & version.major & '.' & version.minor & '.' & version.revision & ' '& '(', '#interceptData.settings.serverText#on#interceptData.settings.serverBG#' ) 
+					& print.text( status, statusColors[ status ] & 'on#interceptData.settings.serverBG#' ) 
+					& print.text( ') ', '#interceptData.settings.serverText#on#interceptData.settings.serverBG#' );	
+			}
+			
 			
 			interceptData.cars.server.background = interceptData.settings.serverBG;	
 			
