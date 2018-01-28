@@ -106,7 +106,11 @@ component {
     	};
     	interceptorService.announceInterception( 'onBulletTrain', myData );
     	
+    	var termWidth = shell.getTermWidth();
+    	if( termWidth == 0 ) { termWidth=80; }
+    	var currentWidth = 0; 
     	var prompt = ( settings.addNewLine ? chr( 10 ) : '' );
+    	currentWidth = 0;
     	var lastbackground = 'black';
     	var first = true;
     	var thisOrder = settings.carOrder.listToArray();
@@ -121,10 +125,31 @@ component {
     	for( var car in thisOrder ) {
     		car = car.trim();
     		if( !isNull( myData.cars[ car ].text ) ) {
-    			if( !first ) {
-	    			prompt &= print.text( segment_separator, lastbackground & 'on' & myData.cars[ car ].background );    				
-    			}
-	    		prompt &= myData.cars[ car ].text;
+    			// Gather car text in a sperate variable so we can decide if it's short enough to fiton this line
+    			var thisCarText = '';
+	    		thisCarText &= myData.cars[ car ].text;
+	    		thisCarWidth = print.unansi( thisCarText ).len();
+	    		
+	    		// If this car will overrun the line...
+				if( currentWidth + thisCarWidth + 1 > termWidth ) {
+					// Print the segment with no background
+	    			if( !first ) {
+		    			prompt &= print.text( segment_separator, lastbackground );    				
+	    			}
+	    			// And add a line break
+	    			prompt &= chr( 10 );
+	    			// Start the cuumulative acount over
+	    			currentWidth = thisCarWidth;
+				} else {
+					// Otherise, print a transitioning segment
+	    			if( !first ) {
+		    			prompt &= print.text( segment_separator, lastbackground & 'on' & myData.cars[ car ].background );    				
+	    			}
+	    			// And add the segment on
+					currentWidth += ( thisCarWidth + 1 );
+				}
+	    		
+	    		prompt &= thisCarText;
 	    		lastbackground = myData.cars[ car ].background ?: 'black';
 	    		first = false;
 	    	}
