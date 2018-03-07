@@ -36,13 +36,13 @@ component {
 			// current working directory car
 			'dirEnable' : true,
 			'dirText' : 'white',
-			'dirBG' : 'cyan',
+			'dirBG' : 'DodgerBlue1',
 			
 			// Git repo info car
 			'gitEnable' : true,
 			'gitText' : 'white',
-			'gitCleanBG' : 'green',
-			'gitDirtyBG' : 'red',
+			'gitCleanBG' : 'green2',
+			'gitDirtyBG' : 'red3',
 			// Wait this many miliseconds to collect the Git data before giving up
 			'gitTimeoutMS' : 200,
 			// Override this unicode char if you're not using a Powerline font
@@ -56,13 +56,13 @@ component {
 			
 			// CommandBox version car
 			'boxVersionEnable' : true,
-			'boxVersionText' : 'black',
-			'boxVersionBG' : 'yellow',
+			'boxVersionText' : 'white',
+			'boxVersionBG' : 'DodgerBlue3',
 			
 			// Package info car
 			'packageEnable' : true,
 			'packageText' : 'white',
-			'packageBG' : 'magenta',
+			'packageBG' : 'purple3',
 			
 			// Custom car
 			'customEnable' : false,
