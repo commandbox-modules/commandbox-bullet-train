@@ -138,7 +138,6 @@ component {
 			// Release file system locks on the repo
 			if( structKeyExists( local, 'git' ) ) {
 				git.getRepository().close();
-				git.close();
 			}
 			
 			running[ CWD ] = false;
