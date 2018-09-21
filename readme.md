@@ -64,8 +64,7 @@ config set modules.commandbox-bullet-train.enable=true
 
 ##  Execution Time
 
-This displays the number of milliseconds the previous command took to execute.  Commands who are so fast they fall below a certain
-threshold are ignored. 
+This displays the number of days, hours, minutes, seconds and milliseconds the previous command took to execute.  Commands who are so fast they fall below a certain threshold are ignored. 
 
 ![](https://raw.githubusercontent.com/commandbox-modules/commandbox-bullet-train/master/images/BTExecTime.png)
 
