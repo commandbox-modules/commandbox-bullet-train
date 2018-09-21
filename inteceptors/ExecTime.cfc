@@ -44,12 +44,16 @@ component {
 		  
 		}
 		var outputTime = [];
-		if( day > 0 ) outputTime.append( '#day#d' );
-		if( hr > 0 ) outputTime.append( '#hr#hr' );
-		if( min > 0 ) outputTime.append( '#min#min' );
-		// Ignore seconds and ms for times over an hour to keep things tidy
-		if( sec > 0 && hr == 0 && day == 0 ) outputTime.append( '#sec#sec' );
-		if( ms > 0 && hr == 0 && day == 0 ) outputTime.append( '#ms#ms' );
+		// Output days if > 0
+		if( day ) outputTime.append( '#day#d' );
+		// Output hours if they exist or if we printed days (3d 0hr 13min)
+		if( hr || day ) outputTime.append( '#hr#hr' );
+		// Output minutes if they exist or if we printed days or hours  (2hr 0min) or (3d 0hr 0min)
+		if( min || day || hr ) outputTime.append( '#min#min' );
+		// Ignore seconds for times over an hour. (2hr 31min) Print zero seconds if there were minutes (3min 0sec)
+		if( ( sec || min ) && !hr && !day ) outputTime.append( '#sec#sec' );
+		// Ignore ms for times over a minute. (3min 12sec) (12sec 125ms) (750ms) Omit zero ms (3sec)
+		if( ms && !hr && !day && !min ) outputTime.append( '#ms#ms' );
 		 
 		return outputTime.toList( ' ' );
 	}
