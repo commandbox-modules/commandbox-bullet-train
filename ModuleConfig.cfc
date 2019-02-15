@@ -125,7 +125,7 @@ component {
     	for( var car in thisOrder ) {
     		car = car.trim();
     		if( !isNull( myData.cars[ car ].text ) ) {
-    			// Gather car text in a sperate variable so we can decide if it's short enough to fiton this line
+    			// Gather car text in a sperate variable so we can decide if it's short enough to fit on this line
     			var thisCarText = '';
 	    		thisCarText &= myData.cars[ car ].text;
 	    		thisCarWidth = print.unansi( thisCarText ).len();
