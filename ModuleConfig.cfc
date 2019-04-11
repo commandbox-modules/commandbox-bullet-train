@@ -94,7 +94,7 @@ component {
     		var segment_separator='>';    		
     	}
     	
-    	if( !settings.enable ) {
+    	if( !isBoolean( settings.enable ) || !settings.enable ) {
     		return;
     	}
  
