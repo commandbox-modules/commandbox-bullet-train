@@ -155,7 +155,7 @@ This shows the current version of the CommandBox CLI.
 
 ## Package Info
 
-If the current working directory is a package (has a `boxjson`) the name and version of the package will appear here.
+If the current working directory is a package (has a `box.json`) the name and version of the package will appear here.
  
 
 ![](https://raw.githubusercontent.com/commandbox-modules/commandbox-bullet-train/master/images/BTPackage.png)
@@ -167,7 +167,7 @@ If the current working directory is a package (has a `boxjson`) the name and ver
 
 ## Custom
 
-Output a custom, arbitrary message.  It's up to you to include any leading or trailing spaes that you want in the output.  This car is disabled by default.
+Output a custom, arbitrary message.  It's up to you to include any leading or trailing spaces that you want in the output.  This car is disabled by default.
 
 ```
 config set modules.commandbox-bullet-train.customEnable=true
@@ -210,7 +210,7 @@ The names of the default cars are as follows: `custom,execTime,status,time,boxVe
 
 # Extending CommandBox Bullet Train
 
-You can create your own custom cars and extend the base module very easily.  If you have an idea for a module that everyone would find useful, contact us and we'll see about just adding it to the core.  To extend CommandBox butter train, create a module whose `ModuleConfig.cfc` listens to the `onBulletTrain` interception point.  Your interceptor will add its formatted text to the `intercept` data and the main Bullet Train module will pick it up and display it.  Here's the steps to extend bullet train in less than one minute.
+You can create your own custom cars and extend the base module very easily.  If you have an idea for a module that everyone would find useful, contact us and we'll see about just adding it to the core.  To extend CommandBox Bullet Train, create a module whose `ModuleConfig.cfc` listens to the `onBulletTrain` interception point.  Your interceptor will add its formatted text to the `intercept` data and the main Bullet Train module will pick it up and display it.  Here's the steps to extend bullet train in less than one minute.
 
 ```bash
 mkdir myBulletTrainCar --cd
