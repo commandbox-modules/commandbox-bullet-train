@@ -18,7 +18,7 @@ install commandbox-bullet-train
 
 ## Fonts
 
-This module uses some special Unicode characters to draw the prompt that may not be in your default terminal.  You can turn off all Uniode chars and live with an uglier shell like so:
+This module uses some special Unicode characters to draw the prompt that may not be in your default terminal.  You can turn off all Unicode chars and live with an uglier shell like so:
 
 ```bash
 config set modules.commandbox-bullet-train.unicode=false
