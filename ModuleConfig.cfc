@@ -9,7 +9,7 @@ component {
 		settings = {
 			// General module settings
 			'enable' : true,
-			'promptChar' : '>' ,
+			'promptChar' : '❯' ,
 			'separateLine' : true,
 			'addNewLine' : true,
 			'unicode' : true,
@@ -89,9 +89,11 @@ component {
 	
     function prePrompt( interceptData ) {
     	if( settings.unicode ) {
-    		var segment_separator='';	
+    		var segment_separator='';
+    		var thisPromptChar = settings.promptChar;
     	} else {
-    		var segment_separator='>';    		
+    		var segment_separator='>';
+    		var thisPromptChar = '>';
     	}
     	
     	if( !isBoolean( settings.enable ) || !settings.enable ) {
@@ -134,7 +136,7 @@ component {
 				if( currentWidth + thisCarWidth + 1 > termWidth ) {
 					// Print the segment with no background
 	    			if( !first ) {
-		    			prompt &= print.text( segment_separator, lastbackground );    				
+		    			prompt &= print.text( segment_separator, lastbackground );
 	    			}
 	    			// And add a line break
 	    			prompt &= chr( 10 );
@@ -142,9 +144,7 @@ component {
 	    			currentWidth = thisCarWidth;
 				} else {
 					// Otherise, print a transitioning segment
-	    			if( !first ) {
-		    			prompt &= print.text( segment_separator, lastbackground & 'on' & myData.cars[ car ].background );    				
-	    			}
+	    			prompt &= print.text( segment_separator, lastbackground & 'on' & myData.cars[ car ].background );
 	    			// And add the segment on
 					currentWidth += ( thisCarWidth + 1 );
 				}
@@ -157,7 +157,7 @@ component {
     	
 		prompt &= print.text( segment_separator, lastbackground );
     	
-    	interceptData.prompt = prompt & ( settings.separateLine ? chr( 10 ) : '' ) & settings.promptChar &' ';
+    	interceptData.prompt = prompt & ( settings.separateLine ? chr( 10 ) : '' ) & thisPromptChar &' ';
         
     }
     
