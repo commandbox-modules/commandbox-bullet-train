@@ -32,6 +32,8 @@ component {
 			'serverEnable' : true,
 			'serverText' : 'black',
 			'serverBG' : 'white',
+			// Maximum folders to traverse up looking for a .git repo
+			'serverDepth' : 0,
 			
 			// current working directory car
 			'dirEnable' : true,
