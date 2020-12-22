@@ -47,6 +47,8 @@ component {
 			'gitTimeoutMS' : 200,
 			// Override this unicode char if you're not using a Powerline font
 			'gitPrefix' : '',
+			// Maximum folders to traverse up looking for a .git repo
+			'gitDepth' : 0,
 			
 			// Previous command status car
 			'statusEnable' : true,
