@@ -32,6 +32,22 @@ component {
 	
 	private function generateData( CWD, interceptData ) {
 		var repoPath = CWD & '/.git';
+		
+		// If bullet train setting 'gitDepth' is the default 0 value
+		// then this will not traverser up
+		if( directoryExists(repoPath) eq false ){
+			var traverseDepth = '..';
+			for(var i = 1; i <= interceptData.settings.gitDepth; i++){
+				var currentDirectory = fileSystem.resolvePath(traverseDepth) & '/.git';
+				if( directoryExists(currentDirectory) ){
+					repoPath = currentDirectory;
+					break;
+				}else{
+					traverseDepth = traverseDepth & '/..';
+				}
+			}
+		}
+		
 		var result = {};
 		
 		// Short circuit so we don't run more than once for the same dir
