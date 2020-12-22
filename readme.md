@@ -1,7 +1,7 @@
 This module will customize your CommandBox prompt while in the interactive shell.  It has multiple "cars" that are part of the train
 and each car can contribute some output to the prompt that is working directory-aware.  
 
-**THIS MODULE REQUIRES THE LATEST COMMANDBOX 4.0 SNAPSHOT RELEASE!**
+**THIS MODULE REQUIRES COMMANDBOX 4.0 or higher**
 
 This project is based on the Zsh Bullet Train theme which is based on the Powerline shell prompt.  The goal is to add in additional information 
 to your prompt that is specific to the current working directory, or the last command you ran. 
