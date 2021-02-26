@@ -32,6 +32,8 @@ component {
 			'serverEnable' : true,
 			'serverText' : 'black',
 			'serverBG' : 'white',
+			// Maximum folders to traverse up looking for a .git repo
+			'serverDepth' : 0,
 			
 			// current working directory car
 			'dirEnable' : true,
@@ -47,6 +49,8 @@ component {
 			'gitTimeoutMS' : 200,
 			// Override this unicode char if you're not using a Powerline font
 			'gitPrefix' : '',
+			// Maximum folders to traverse up looking for a .git repo
+			'gitDepth' : 0,
 			
 			// Previous command status car
 			'statusEnable' : true,

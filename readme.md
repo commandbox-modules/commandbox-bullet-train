@@ -98,6 +98,7 @@ If the current working directory has a server that has been started in it, the e
 * `serverEnable` - True/false enable this car
 * `serverText` - ANSI text color
 * `serverBG` - ANSI background color
+* `serverDepth` - Default is 0. By default this module only looks for server info in the current directory, so if you're in a subfolder of your project this server car will not display. If you are 4 subfolders deep into your project, change this setting to 4 and this module will search for server info 4 folders deep, then stop. Set it to any depth you'd like. 
 
 ## Current Working Directory
 
@@ -127,6 +128,7 @@ It is a current known limitation that modified file that are also ignored show i
 * `gitDirtyBG` - ANSI background color when the Git repo is "dirty"
 * `gitTimeoutMS` -Large Git repos can take a while to collect the information from.  The info is acquired async and this controls how many milliseconds to wait before giving up and rendering partial data on the prompt.  If you see "..." in the car, that means we gave up, but don't worry, when the thread completes, the info is cached and it will show up the next time the prompt is drawn for that directory. 
 * `gitPrefix` - Override Unicode char if you're not using a Powerline font.  It controls the character that displays at the start of the car.  Set to a space to not have a char at all.. 
+* `gitDepth` - Default is 0. By default this module only looks for a git repo in the current directory, so if you're in a subfolder of your project this git car will not display. If you are 4 subfolders deep into your project, change this setting to 4 and this module will search for a repo 4 folders deep, then stop. Set it to any depth you'd like. 
 
 ## Previous Command Status
 
