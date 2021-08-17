@@ -15,7 +15,7 @@ component {
 		
 		try {
 
-			serverDetails = serverService.resolveServerDetails( directory = rootPath, serverProps={} );
+			serverDetails = serverService.resolveServerDetails( serverProps={} );
 
 			if( !serverDetails.serverIsNew ) {
 
@@ -25,7 +25,7 @@ component {
 				
 			}else{
 				for(var i = 1; i <= interceptData.settings.serverDepth; i++){
-					serverDetails = serverService.resolveServerDetails( serverProps={directory=rootPath} );
+					serverDetails = serverService.resolveServerDetails( serverProps={ directory : rootPath } );
 					if( !serverDetails.serverIsNew ) {
 						carSettings = generateCar(serverDetails, interceptData);	
 						interceptData.cars.server.text = carSettings.text;
