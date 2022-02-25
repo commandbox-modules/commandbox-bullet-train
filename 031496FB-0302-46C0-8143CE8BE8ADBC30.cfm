@@ -1,1 +1,0 @@
-<cfscript>savecontent variable="variables.__out" { variables.__result = evaluate( variables.__statement ); }</cfscript>
