@@ -2,7 +2,7 @@
     "name":"CommandBox Bullet Train",
     "version":"1.4.1",
     "author":"Brad Wood",
-    "location":"commandbox-modules/commandbox-bullet-train#v1.4.1",
+    "location":"forgeboxStorage",
     "homepage":"https://github.com/commandbox-modules/commandbox-bullet-train/",
     "documentation":"",
     "repository":{
@@ -14,7 +14,6 @@
     "shortDescription":"A cool zsh-inspired prompt customizer for CommandBox 4.0",
     "type":"commandbox-modules",
     "scripts":{
-        "postVersion":"package set location='commandbox-modules/commandbox-bullet-train#v`package version`'",
         "onRelease":"publish",
         "postPublish":"!git push --follow-tags"
     },
